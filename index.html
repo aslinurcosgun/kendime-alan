@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+   
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Kendime Alan</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#f3dce8">
+<link rel="apple-touch-icon" href="icon-512.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Kendime Alan">
+
+</head>
+
+<body>
+
+    <main class="uygulama">
+
+        <!-- Üst başlık -->
+
+        <header class="ust-alan">
+
+            <div>
+
+                <p class="kucuk-baslik">
+
+                    BENİM KÜÇÜK DÜNYAM
+
+                </p>
+
+                <h1>Kendime Alan 🌷</h1>
+
+            </div>
+
+            <div class="profil-simgesi">♡</div>
+
+        </header>
+
+<!-- ANA SAYFA -->
+
+<section id="ana-sayfa" class="sayfa">
+
+    <!-- KISISEL KARSILAMA -->
+
+    <div class="ana-karsilama">
+
+        <p id="ana-tarih">Bugün</p>
+
+        <h2 id="ana-selamlama">Merhaba! 🌷</h2>
+
+        <p>Bugün kendine de zaman ayırmayı unutma.</p>
+
+    </div>
+
+    <!-- GUNUN NOTU -->
+
+    <div class="ana-not-kart">
+
+        <h3>✨ Bugünün Küçük Notu</h3>
+
+        <p id="ana-gunun-notu"></p>
+
+    </div>
+
+    <h3 class="ana-bolum-baslik">Bugünüm 🌼</h3>
+
+    <!-- TIKLANABILIR OZET KARTLARI -->
+
+    <div class="ozet-alani">
+
+        <button
+
+            type="button"
+
+            class="ozet-kart gorev-kart ana-ozet-buton"
+
+            data-hedef="ajanda"
+
+        >
+
+            <span class="kart-simge">✓</span>
+
+            <h3>Görevlerim ↗</h3>
+
+            <p id="ozet-gorev">Henüz kayıt yok</p>
+
+        </button>
+
+        <button
+
+            type="button"
+
+            class="ozet-kart su-kart ana-ozet-buton"
+
+            data-hedef="saglik"
+
+        >
+
+            <span class="kart-simge">💧</span>
+
+            <h3>Su Takibi ↗</h3>
+
+            <p id="ozet-su">Henüz kayıt yok</p>
+
+        </button>
+
+        <button
+
+            type="button"
+
+            class="ozet-kart uyku-kart ana-ozet-buton"
+
+            data-hedef="saglik"
+
+        >
+
+            <span class="kart-simge">☾</span>
+
+            <h3>Uyku ↗</h3>
+
+            <p id="ozet-uyku">Henüz kayıt yok</p>
+
+        </button>
+
+        <button
+
+            type="button"
+
+            class="ozet-kart butce-kart ana-ozet-buton"
+
+            data-hedef="butce"
+
+        >
+
+            <span class="kart-simge">₺</span>
+
+            <h3>Harcamalar ↗</h3>
+
+            <p id="ozet-harcama">Henüz kayıt yok</p>
+
+        </button>
+
+    </div>
+
+    <!-- BUGUNKU GOREVLER -->
+
+    <div class="ana-gorev-kart">
+
+        <div class="ana-kart-baslik">
+
+            <h3>📅 Bugünkü Görevlerim</h3>
+
+            <button
+
+                type="button"
+
+                class="ana-sayfa-gecis"
+
+                data-hedef="ajanda"
+
+            >
+
+                Tümünü Gör ↗
+
+            </button>
+
+        </div>
+
+        <p id="ana-bos-gorev">
+
+            Bugün için henüz görev yok.
+
+        </p>
+
+        <ul id="ana-gorev-listesi"></ul>
+
+        <p id="ana-fazla-gorev" hidden></p>
+
+    </div>
+
+    <!-- HEDEF ILERLEMESI -->
+
+    <div class="ana-hedef-kart">
+
+        <div class="ana-kart-baslik">
+
+            <h3>🌿 Hedeflerime Yolculuk</h3>
+
+            <button
+
+                type="button"
+
+                class="ana-sayfa-gecis"
+
+                data-hedef="ajanda"
+
+            >
+
+                Hedeflerim ↗
+
+            </button>
+
+        </div>
+
+        <p id="ana-hedef-sayac">Henüz hedef yok</p>
+
+        <div class="ana-hedef-cubugu">
+
+            <div id="ana-hedef-doluluk"></div>
+
+        </div>
+
+        <p class="ana-hedef-mesaj">
+
+            Her küçük adım değerli. ✨
+
+        </p>
+
+    </div>
+
+</section>
+
+        <!-- AJANDA SAYFASI -->
+
+<!-- AJANDA SAYFASI -->
+
+<section id="ajanda" class="sayfa" hidden>
+
+    <h2>📅 Günlük Ajandam</h2>
+
+    <p>Bugün neler yapmak istiyorsun?</p>
+
+<!-- AYLIK TAKVIM -->
+
+<div class="takvim-kart">
+
+    <div class="takvim-baslik">
+
+        <button
+
+            type="button"
+
+            id="onceki-ay"
+
+            aria-label="Önceki ay"
+
+        >
+
+            ❮
+
+        </button>
+
+        <h3 id="takvim-ay-baslik">
+
+            Takvim
+
+        </h3>
+
+        <button
+
+            type="button"
+
+            id="sonraki-ay"
+
+            aria-label="Sonraki ay"
+
+        >
+
+            ❯
+
+        </button>
+
+    </div>
+
+    <!-- Haftanin gunleri -->
+
+    <div class="takvim-gunleri">
+
+        <span>Pt</span>
+
+        <span>Sa</span>
+
+        <span>Ça</span>
+
+        <span>Pe</span>
+
+        <span>Cu</span>
+
+        <span>Ct</span>
+
+        <span>Pz</span>
+
+    </div>
+
+    <!-- Gunler JavaScript ile eklenecek -->
+
+    <div id="takvim-gunler" class="takvim-grid"></div>
+
+</div>
+
+<!-- SECILEN GUN -->
+
+<div class="secilen-gun-alani">
+
+    <h3 id="secilen-tarih-baslik">
+
+        Günlük Planım 🌷
+
+    </h3>
+
+</div>
+
+    <!-- Yeni görev ekleme -->
+
+    <form id="gorev-form" class="gorev-form">
+
+        <label for="gorev-input">
+
+            Yeni Görev
+
+        </label>
+
+        <input
+
+            type="text"
+
+            id="gorev-input"
+
+            placeholder="Örn: Ders çalış"
+
+            maxlength="120"
+
+            required
+
+        >
+
+        <button type="submit">
+
+            + Görev Ekle
+
+        </button>
+
+    </form>
+
+    <!-- Görev listesi -->
+
+   <div class="gorev-listesi-alani">
+
+
+        <h3>Görevlerim 🌷</h3>
+
+        <p id="bos-gorev-mesaji">
+
+            Henüz görev eklemedin.
+
+        </p>
+
+        <ul id="gorev-listesi"></ul>
+
+    </div>
+
+<!-- HAFTALIK PLANLAR -->
+
+<section class="haftalik-kart">
+
+    <h3>💜 Bu Haftanın Planları</h3>
+
+    <p id="hafta-tarihleri"></p>
+
+    <!-- Haftalik ilerleme -->
+
+    <div class="haftalik-ilerleme">
+
+        <div class="ilerleme-bilgisi">
+
+            <span>Haftalık ilerleme</span>
+
+            <span id="haftalik-sayac">0/0</span>
+
+        </div>
+
+        <div class="ilerleme-cubugu">
+
+            <div id="haftalik-doluluk"></div>
+
+        </div>
+
+    </div>
+
+    <!-- Haftalik plan listesi -->
+
+    <ul id="haftalik-liste"></ul>
+
+    <p id="bos-haftalik-mesaji">
+
+        Bu hafta için henüz plan eklemedin.
+
+    </p>
+
+    <!-- Yeni plan formu -->
+
+    <form id="haftalik-form">
+
+        <input
+
+            type="text"
+
+            id="haftalik-input"
+
+            placeholder="Bu hafta ne yapmak istiyorsun?"
+
+            maxlength="120"
+
+            aria-label="Yeni haftalık plan"
+
+            required
+
+        >
+
+        <button type="submit">
+
+            + Haftalık Plan Ekle
+
+        </button>
+
+    </form>
+
+</section>
+
+<!-- AYLIK PLANLAR -->
+
+<section class="aylik-kart">
+
+    <h3>🌸 Bu Ay Yapılacaklar</h3>
+
+    <p id="aylik-tarih"></p>
+
+    <!-- Aylik ilerleme -->
+
+    <div class="aylik-ilerleme">
+
+        <div class="aylik-ilerleme-bilgisi">
+
+            <span>Aylık ilerleme</span>
+
+            <span id="aylik-sayac">0/0</span>
+
+        </div>
+
+        <div class="aylik-ilerleme-cubugu">
+
+            <div id="aylik-doluluk"></div>
+
+        </div>
+
+    </div>
+
+    <!-- Aylik plan listesi -->
+
+    <ul id="aylik-liste"></ul>
+
+    <p id="bos-aylik-mesaji">
+
+        Bu ay için henüz plan eklemedin.
+
+    </p>
+
+    <!-- Yeni aylik plan -->
+
+    <form id="aylik-form">
+
+        <input
+
+            type="text"
+
+            id="aylik-input"
+
+            placeholder="Bu ay ne yapmak istiyorsun?"
+
+            maxlength="120"
+
+            aria-label="Yeni aylık plan"
+
+            required
+
+        >
+
+        <button type="submit">
+
+            + Aylık Plan Ekle
+
+        </button>
+
+    </form>
+
+</section>
+
+<!-- HEDEFLERIM -->
+
+<section class="hedef-kart">
+
+    <h3>🌿 Hedeflerim</h3>
+
+    <p class="hedef-aciklama">
+
+        Küçük adımlar, güzel ilerlemeler.
+
+    </p>
+
+    <!-- Hedef ilerleme alani -->
+
+    <div class="hedef-ilerleme">
+
+        <div class="hedef-ilerleme-bilgisi">
+
+            <span>Tamamlanan hedefler</span>
+
+            <span id="hedef-sayac">0/0</span>
+
+        </div>
+
+        <div class="hedef-ilerleme-cubugu">
+
+            <div id="hedef-doluluk"></div>
+
+        </div>
+
+    </div>
+
+    <!-- Hedef listesi -->
+
+    <ul id="hedef-listesi"></ul>
+
+    <p id="bos-hedef-mesaji">
+
+        Henüz bir hedef eklemedin.
+
+    </p>
+
+    <!-- Yeni hedef formu -->
+
+    <form id="hedef-form">
+
+        <input
+
+            type="text"
+
+            id="hedef-input"
+
+            placeholder="Yeni hedefini yaz..."
+
+            maxlength="150"
+
+            aria-label="Yeni hedef"
+
+            required
+
+        >
+
+        <button type="submit">
+
+            + Yeni Hedef Ekle
+
+        </button>
+
+    </form>
+
+</section>
+
+<!-- TARIHSIZ GOREVLER -->
+
+<div class="gorev-listesi-alani" hidden style="display: none !important;">
+
+    <h3>Tarihsiz Görevler 📌</h3>
+
+    <p class="yardim-metni">
+
+        Bu görevleri istediğin bir güne atayabilirsin.
+
+    </p>
+
+    <p id="bos-tarihsiz-mesaji">
+
+        Tarihsiz görev bulunmuyor.
+
+    </p>
+
+    <ul id="tarihsiz-gorev-listesi"></ul>
+
+</div>
+
+</section>
+
+<!-- SAGLIK VE BAKIM SAYFASI -->
+
+<section id="saglik" class="sayfa" hidden>
+
+  <h2>🌿 Sağlık ve Bakım</h2>
+
+  <p>Kendime ayırdığım küçük anlar.</p>
+
+  <div class="saglik-kart ka-saglik-donem" id="ka-saglik-donem">
+    <p class="bv-donem-etiket">📅 Sağlık Görünümü</p>
+    <div class="bv-sekme" role="group" aria-label="Sağlık görünüm aralığı">
+      <button type="button" data-ka-saglik-mod="gun" class="bv-sekme-aktif">Günlük</button>
+      <button type="button" data-ka-saglik-mod="hafta">Haftalık</button>
+      <button type="button" data-ka-saglik-mod="ay">Aylık</button>
+    </div>
+    <div class="bv-tarih-gecis">
+      <button type="button" id="ka-saglik-onceki" aria-label="Önceki dönem">❮</button>
+      <strong id="ka-saglik-baslik"></strong>
+      <button type="button" id="ka-saglik-sonraki" aria-label="Sonraki dönem">❯</button>
+    </div>
+    <div id="ka-saglik-donem-ozet" hidden></div>
+  </div>
+
+  <form id="saglik-form" class="saglik-form">
+
+    <div class="saglik-kart">
+
+      <label for="saglik-tarih">Kayıt Tarihi</label>
+
+      <input type="date" id="saglik-tarih" required>
+
+      <p id="saglik-durum" role="status"></p>
+
+    </div>
+
+    <div class="saglik-kart uyku-bolum">
+
+      <h3>🌙 Uyku</h3>
+
+      <label for="uyku-sure">Uyku Süresi (saat)</label>
+
+      <input type="number" id="uyku-sure" min="0" max="24" step="0.5" placeholder="Örn: 7.5">
+
+      <label for="uyku-kalite">Uyku Kalitesi</label>
+
+      <select id="uyku-kalite">
+
+        <option value="">Seçiniz</option>
+
+        <option value="cok-iyi">Çok iyi</option>
+
+        <option value="iyi">İyi</option>
+
+        <option value="orta">Orta</option>
+
+        <option value="kotu">Kötü</option>
+
+      </select>
+
+    </div>
+
+    <div class="saglik-kart su-bolum">
+
+      <h3>💧 Su Takibi</h3>
+
+      <label for="su-miktar">İçtiğim Su (ml)</label>
+
+      <input type="number" id="su-miktar" min="0" max="15000" step="50" placeholder="Örn: 1500">
+
+    </div>
+
+    <div class="saglik-kart beslenme-bolum">
+
+      <h3>🥗 Beslenme Günlüğüm</h3>
+
+      <p>Öğünlerini saatine göre ekle; istediğin kadar kayıt oluşturabilirsin.</p>
+
+      <div id="ogun-listesi" class="saglik-dinamik-liste"></div>
+
+      <p id="eski-ogun-notu" hidden></p>
+
+      <div class="saglik-ikili">
+
+        <div>
+
+          <label for="ogun-saat">Saat</label>
+
+          <input type="time" id="ogun-saat">
+
+        </div>
+
+        <div>
+
+          <label for="ogun-yemek">Ne yedim?</label>
+
+          <input type="text" id="ogun-yemek" maxlength="200" placeholder="Örn: Peynirli tost">
+
+        </div>
+
+      </div>
+
+      <label for="ogun-kalori">Kalori (kcal) — isteğe bağlı</label>
+      <input type="number" id="ogun-kalori" min="0" max="20000" step="1" placeholder="Biliyorsan yazabilirsin">
+      <p id="ka-gunluk-kalori" class="ka-bilgi-bari">Girilen kalorilerin toplamı: —</p>
+
+      <button type="button" id="ogun-ekle" class="saglik-ikincil">+ Öğün Ekle</button>
+
+      <button type="button" id="ogun-iptal" class="saglik-ikincil" hidden>Düzenlemeyi İptal Et</button>
+
+      <p class="saglik-kucuk-yazi">Öğünler eklediğinde otomatik kaydedilir.</p>
+
+    </div>
+
+    <div class="saglik-kart spor-bolum">
+
+      <h3>🏃 Spor Takibim</h3>
+
+      <p>Bir günde birden fazla spor kaydedebilirsin.</p>
+
+      <div id="spor-listesi" class="saglik-dinamik-liste"></div>
+
+      <p id="spor-toplam" class="saglik-kucuk-yazi">Henüz spor eklenmedi.</p>
+
+      <label for="spor-tur">Spor Türü</label>
+
+      <select id="spor-tur">
+
+        <option value="">Seçiniz</option>
+
+        <option value="yuruyus">Yürüyüş</option>
+
+        <option value="pilates">Pilates</option>
+
+        <option value="yoga">Yoga</option>
+
+        <option value="fitness">Fitness</option>
+
+        <option value="kosu">Koşu</option>
+
+        <option value="bisiklet">Bisiklet</option>
+
+        <option value="diger">Diğer</option>
+
+      </select>
+
+      <label for="spor-sure">Spor Süresi (dakika)</label>
+
+      <input type="number" id="spor-sure" min="1" max="1440" step="1" placeholder="Örn: 45">
+
+      <label for="spor-kalori">Tahmini Enerji Harcaması (kcal) — isteğe bağlı</label>
+
+      <input type="number" id="spor-kalori" min="0" max="20000" step="1" placeholder="Varsa cihazındaki tahmini değer">
+
+      <p class="saglik-kucuk-yazi">Enerji değeri otomatik hesaplanmaz; kesin ölçüm değildir.</p>
+
+      <button type="button" id="spor-ekle" class="saglik-ikincil">+ Spor Ekle</button>
+
+      <button type="button" id="spor-iptal" class="saglik-ikincil" hidden>Düzenlemeyi İptal Et</button>
+
+    </div>
+
+    <div class="saglik-kart bakim-bolum">
+
+      <h3>✨ Günlük Cilt Bakımım</h3>
+
+      <p>Profil → Ayarlar'da belirlediğin rutin her gün burada görünür.</p>
+
+      <div class="bakim-alt-kart">
+
+        <h4>☀️ Sabah Rutinim</h4>
+
+        <div id="sabah-rutin-listesi" class="saglik-dinamik-liste"></div>
+
+      </div>
+
+      <div class="bakim-alt-kart">
+
+        <h4>🌙 Akşam Rutinim</h4>
+
+        <div id="aksam-rutin-listesi" class="saglik-dinamik-liste"></div>
+
+      </div>
+
+      <div class="gunluk-bakim-ekleme">
+        <h4>🌷 Bugüne Özel Bakım Ekle</h4>
+        <p>Yalnızca seçili güne eklenir. Sabit rutinlerini değiştirmez.</p>
+        <div class="saglik-ikili">
+          <div>
+            <label for="gunluk-bakim-zaman">Rutin</label>
+            <select id="gunluk-bakim-zaman">
+              <option value="sabah">☀️ Sabah</option>
+              <option value="aksam">🌙 Akşam</option>
+            </select>
+          </div>
+          <div>
+            <label for="gunluk-bakim-metin">Bakım adımı</label>
+            <input type="text" id="gunluk-bakim-metin" maxlength="100" placeholder="Örn: Nem maskesi">
+          </div>
+        </div>
+        <button type="button" id="gunluk-bakim-ekle" class="saglik-ikincil">+ Günlük Bakım Ekle</button>
+        <button type="button" id="gunluk-bakim-iptal" class="saglik-ikincil" hidden>Düzenlemeyi İptal Et</button>
+        <p id="gunluk-bakim-durum" role="status" class="saglik-kucuk-yazi"></p>
+      </div>
+
+      <button type="button" id="rutin-profile-git" class="saglik-ikincil">⚙️ Rutini Profil'den Yönet</button>
+
+    </div>
+
+    <div class="saglik-kart" id="ka-kilo-karti">
+      <h3>⚖️ Kilo Kayıtlarım</h3>
+      <p>Ölçümlerini tarihe göre kaydedebilir ve geçmiş ölçümlerine bakabilirsin.</p>
+      <div id="ka-kilo-ozet" class="ka-kilo-ozet" aria-live="polite"></div>
+      <label for="ka-kilo-tarih">Ölçüm tarihi</label>
+      <input type="date" id="ka-kilo-tarih">
+      <label for="ka-kilo-deger">Ölçüm (kg)</label>
+      <input type="number" id="ka-kilo-deger" min="1" max="500" step="0.1" placeholder="Örn: 56">
+      <div class="ka-kilo-dugmeler">
+        <button type="button" id="ka-kilo-ekle" class="saglik-ikincil">Ölçümü Kaydet</button>
+        <button type="button" id="ka-kilo-sil" class="saglik-ikincil">Seçili Tarihi Sil</button>
+      </div>
+      <p id="ka-kilo-durum" role="status"></p>
+      <div id="ka-kilo-liste" class="saglik-dinamik-liste"></div>
+    </div>
+
+    <div class="saglik-kart ruh-bolum">
+
+      <h3>🌸 Günlük Notlarım</h3>
+
+      <label for="ruh-hali">Ruh Halim</label>
+
+      <select id="ruh-hali">
+
+        <option value="">Seçmek istemiyorum</option>
+
+        <option value="mutlu">😊 Mutlu</option>
+
+        <option value="iyi">🙂 İyi</option>
+
+        <option value="normal">😐 Normal</option>
+
+        <option value="yorgun">😴 Yorgun</option>
+
+        <option value="uzgun">😔 Üzgün</option>
+
+      </select>
+
+      <label for="saglik-not">Kendime Not</label>
+
+      <textarea id="saglik-not" rows="3" maxlength="1000" placeholder="Bugün nasıl geçti?"></textarea>
+
+    </div>
+
+
+    <div class="saglik-butonlar">
+
+      <button type="submit" class="saglik-kaydet">💗 Günü Kaydet</button>
+
+      <button type="button" id="saglik-sil">🗑️ Günün Kaydını Sil</button>
+
+    </div>
+
+  </form>
+
+</section>
+
+    <!-- BUTCE SAYFASI -->
+    <section id="butce" class="sayfa" hidden>
+      <h2>💗 Bütçem ve Hesaplarım</h2>
+      <p>Gelirlerimi, harcamalarımı ve birikimlerimi birlikte takip ediyorum.</p>
+      <div class="butce-kart bv-donem">
+        <p class="bv-donem-etiket">📅 Finansal Görünüm</p>
+        <div class="bv-sekme" role="group" aria-label="Görünüm aralığı">
+          <button type="button" class="bv-sekme-aktif" data-bv-gorunum="gun">Günlük</button>
+          <button type="button" data-bv-gorunum="hafta">Haftalık</button>
+          <button type="button" data-bv-gorunum="ay">Aylık</button>
+        </div>
+        <div class="bv-tarih-gecis">
+          <button type="button" id="bv-onceki" aria-label="Önceki dönem">❮</button>
+          <strong id="bv-donem-baslik">Bugün</strong>
+          <button type="button" id="bv-sonraki" aria-label="Sonraki dönem">❯</button>
+        </div>
+        <label for="bv-tarih">Tarih seç</label>
+        <input type="date" id="bv-tarih">
+        <button type="button" id="bv-bugune-git" class="bv-ikincil">Bugüne git</button>
+      </div>
+
+      <!-- Butce donem ozeti -->
+<div class="bv-ozet-grid ka-butce-yeni-ozet">
+
+    <div class="butce-kart">
+        <small>💰 Gelir</small>
+        <strong id="bv-toplam-gelir">₺0,00</strong>
+    </div>
+
+    <div class="butce-kart">
+        <small>🛍️ Gider</small>
+        <strong id="bv-toplam-gider">₺0,00</strong>
+    </div>
+
+    <div class="butce-kart">
+        <small>🌱 Birikime Ayrılan</small>
+        <strong id="bv-donem-birikim">₺0,00</strong>
+    </div>
+
+    <div class="butce-kart">
+        <small>💗 Bu Dönem Kalan</small>
+        <strong id="bv-donem-kalan">₺0,00</strong>
+    </div>
+
+</div>
+
+<!-- Genel bakiyeler -->
+<div class="ka-butce-genel-bilgi">
+    <p>
+        Toplam Birikim:
+        <strong id="bv-toplam-birikim">₺0,00</strong>
+    </p>
+
+    <p>
+        Güncel Kullanılabilir Bakiye:
+        <strong id="bv-kullanilabilir">₺0,00</strong>
+    </p>
+</div>
+      <p class="bv-bilgi">Dönem toplamları seçili tarihe aittir. Güncel bakiyeler gelecekteki işlemleri içermez.</p>
+
+      <div class="butce-kart">
+        <h3>💳 Hesaplarım ve Kartlarım</h3>
+        <div id="bv-hesap-kartlari" class="bv-hesaplar"></div>
+        <p id="bv-hesap-filtre-durum" class="bv-bilgi"></p>
+        <form id="bv-hesap-form" class="bv-form">
+          <h4 id="bv-hesap-form-baslik">Yeni Hesap Ekle</h4>
+          <label for="bv-hesap-ad">Hesap / kart adı</label>
+          <input id="bv-hesap-ad" maxlength="70" placeholder="Örn: Kira Kartım" required>
+          <button type="submit" id="bv-hesap-kaydet">+ Hesap Ekle</button>
+          <button type="button" id="bv-hesap-iptal" class="bv-ikincil" hidden>İptal</button>
+        </form>
+      </div>
+
+      <div class="butce-kart">
+        <h3>🌸 Gelir Kaynaklarım</h3>
+        <p class="bv-bilgi">Tekrarlanan gelirleri planlayabilirsin. Para ancak “Geliri Aldım” dediğinde hesaba eklenir.</p>
+        <div id="bv-kaynak-listesi" class="bv-liste"></div>
+        <form id="bv-kaynak-form" class="bv-form">
+          <h4 id="bv-kaynak-form-baslik">Gelir Kaynağı Ekle</h4>
+          <label for="bv-kaynak-ad">Gelir adı</label>
+          <input id="bv-kaynak-ad" maxlength="80" placeholder="Örn: Kira Geliri" required>
+          <label for="bv-kaynak-tutar">Tutar (₺)</label>
+          <input type="number" id="bv-kaynak-tutar" min="0.01" max="1000000000" step="0.01" required>
+          <label for="bv-kaynak-hesap">Bağlı hesap</label>
+          <select id="bv-kaynak-hesap" required></select>
+          <label for="bv-kaynak-tekrar">Tekrar</label>
+          <select id="bv-kaynak-tekrar"><option value="tek">Tek seferlik</option><option value="aylik">Her ay</option></select>
+          <label for="bv-kaynak-tarih">Beklenen ilk geliş tarihi</label>
+          <input type="date" id="bv-kaynak-tarih" required>
+          <p class="bv-bilgi">Aylık gelirlerde ilk tarihin gün numarası ödeme günü olarak kullanılır. Ayın sonundan büyük günler ayın son gününe alınır.</p>
+          <button type="submit" id="bv-kaynak-kaydet">+ Gelir Kaynağı Ekle</button>
+          <button type="button" id="bv-kaynak-iptal" class="bv-ikincil" hidden>İptal</button>
+        </form>
+      </div>
+
+      <div class="butce-kart">
+        <h3>➕ Yeni Finansal İşlem</h3>
+        <form id="bv-islem-form" class="bv-form">
+          <label for="bv-islem-tur">İşlem türü</label>
+          <select id="bv-islem-tur"><option value="gelir">Gelir</option><option value="gider">Gider</option><option value="birikim">Birikime Ayır</option><option value="birikim-iade">Birikimden Geri Al</option><option value="transfer">Hesaplar Arası Transfer</option></select>
+          <label for="bv-islem-tarih">İşlem tarihi</label>
+          <input type="date" id="bv-islem-tarih" required>
+          <label for="bv-islem-hesap">Hesap / kart</label>
+          <select id="bv-islem-hesap" required></select>
+          <div id="bv-hedef-hesap-satir" hidden>
+            <label for="bv-hedef-hesap">Transfer edilecek hesap</label>
+            <select id="bv-hedef-hesap"></select>
+          </div>
+          <label for="bv-islem-tutar">Tutar (₺)</label>
+          <input type="number" id="bv-islem-tutar" min="0.01" max="1000000000" step="0.01" required>
+          <div id="bv-kategori-satir"><label for="bv-islem-kategori">Kategori</label><select id="bv-islem-kategori"></select></div>
+          <div id="bv-birikim-ad-satir" hidden><label for="bv-birikim-ad">Birikim hedefi / adı</label><input id="bv-birikim-ad" maxlength="90" placeholder="Örn: Tatil"></div>
+          <label for="bv-islem-aciklama">Açıklama (isteğe bağlı)</label>
+          <input id="bv-islem-aciklama" maxlength="150" placeholder="Örn: Haftalık alışveriş">
+          <button type="submit" id="bv-islem-kaydet">+ İşlem Ekle</button>
+          <button type="button" id="bv-islem-iptal" class="bv-ikincil" hidden>Düzenlemeyi İptal Et</button>
+          <p id="bv-islem-mesaj" role="status"></p>
+        </form>
+      </div>
+
+      <div class="butce-kart">
+        <h3>🐷 Birikimlerim</h3>
+        <div id="bv-birikim-hedefleri" class="bv-liste"></div>
+        <h4>Aylık Bütçe ve Birikim Hedefim</h4>
+        <form id="bv-hedef-form" class="bv-form">
+          <label for="bv-hedef-ay">Hedef ayı</label><input type="month" id="bv-hedef-ay" required>
+          <label for="bv-limit">Aylık harcama bütçesi (₺)</label><input type="number" id="bv-limit" min="0" step="0.01">
+          <label for="bv-birikim-hedef">Aylık birikim hedefi (₺)</label><input type="number" id="bv-birikim-hedef" min="0" step="0.01">
+          <button type="submit">Hedefleri Kaydet</button>
+        </form>
+        <p id="bv-hedef-mesaj" class="bv-bilgi"></p>
+      </div>
+
+      <div class="butce-kart">
+        <h3>🧾 İşlem Geçmişi</h3>
+        <div class="bv-filtreler">
+          <div><label for="bv-filtre-tur">İşlem türü</label><select id="bv-filtre-tur"><option value="">Tümü</option><option value="gelir">Gelir</option><option value="gider">Gider</option><option value="birikim">Birikime Ayır</option><option value="birikim-iade">Birikimden Geri Al</option><option value="transfer">Transfer</option></select></div>
+          <div><label for="bv-filtre-hesap">Hesap</label><select id="bv-filtre-hesap"><option value="">Tümü</option></select></div>
+          <div><label for="bv-filtre-tarih">Tarih filtresi</label><select id="bv-filtre-tarih"><option value="donem">Seçili dönem</option><option value="tum">Tüm tarihler</option></select></div>
+        </div>
+        <div id="bv-islem-listesi" class="bv-liste"></div>
+        <p id="bv-bos-islem">Bu dönem için işlem bulunmuyor.</p>
+      </div>
+    </section>
+
+<!-- PROFIL SAYFASI -->
+
+<section id="profil" class="sayfa" hidden>
+
+    <div class="profil-baslik">
+
+        <div id="profil-avatar" class="profil-avatar">♡</div>
+
+        <div>
+
+            <h2>Profilim 🌷</h2>
+
+            <p id="profil-karsilama">Benim küçük dünyam</p>
+
+        </div>
+
+    </div>
+
+    <!-- KISISEL BILGILER -->
+
+    <div class="profil-panel">
+
+        <h3>💗 Kişisel Bilgilerim</h3>
+
+        <form id="profil-form">
+
+            <label for="profil-ad">Adım</label>
+
+            <input
+
+                type="text"
+
+                id="profil-ad"
+
+                maxlength="60"
+
+                placeholder="Adını yaz..."
+
+            >
+
+            <label for="profil-foto">Profil Fotoğrafım</label>
+
+            <input
+
+                type="file"
+
+                id="profil-foto"
+
+                accept="image/png,image/jpeg,image/webp"
+
+            >
+
+            <button type="button" id="profil-foto-sil">
+
+                Fotoğrafı Kaldır
+
+            </button>
+
+            <label for="profil-not">Kendime Küçük Bir Not</label>
+
+            <textarea
+
+                id="profil-not"
+
+                rows="3"
+
+                maxlength="300"
+
+                placeholder="Burası benim alanım..."
+
+            ></textarea>
+
+            <button type="submit" class="profil-kaydet">
+
+                💗 Bilgilerimi Kaydet
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- GORUNUM TERCIHLERI -->
+
+    <div class="profil-panel profil-tema-panel">
+
+        <h3>🎨 Görünüm ve Tercihler</h3>
+
+        <label for="profil-tema">Uygulama Rengi</label>
+
+        <select id="profil-tema">
+
+            <option value="pudra">🌸 Pudra</option>
+
+            <option value="lavanta">💜 Lavanta</option>
+
+            <option value="yesil">🌿 Adaçayı</option>
+
+        </select>
+
+        <p>Tema seçimin otomatik kaydedilir.</p>
+
+        <p>Bildirim tercihlerini ileride ekleyeceğiz.</p>
+
+    </div>
+
+    <!-- VERI YEDEKLEME -->
+
+    <section id="veri-yonetimi" class="veri-kart">
+
+        <h3>🔐 Verilerim ve Yedekleme</h3>
+
+        <p>
+
+            Görevlerini, sağlık kayıtlarını ve bütçe
+
+            bilgilerini yedekleyebilirsin.
+
+        </p>
+
+        <button type="button" id="yedek-indir">
+
+            💾 Verilerimi Yedekle
+
+        </button>
+
+        <label for="yedek-dosya" class="yedek-etiket">
+
+            📂 Yedekten Geri Yükle
+
+        </label>
+
+        <input
+
+            type="file"
+
+            id="yedek-dosya"
+
+            accept=".json,application/json"
+
+            hidden
+
+        >
+
+        <p id="yedek-durum" role="status"></p>
+
+        <p class="yedek-uyari">
+
+            Geri yükleme, mevcut kayıtlarının yerine
+
+            yedek dosyasındaki kayıtları getirir.
+
+        </p>
+
+    </section>
+
+    <!-- HESAP VE SENKRONIZASYON -->
+
+    <div class="profil-panel profil-hesap-panel">
+
+        <h3>☁️ Hesap ve Senkronizasyon</h3>
+
+        <p>
+
+            İleride e-posta ile giriş yapabilecek
+
+            ve kayıtlarını cihazların arasında
+
+            eşitleyebileceksin.
+
+        </p>
+
+        <p>🌷 Yakında eklenecek.</p>
+
+    </div>
+
+    <p id="profil-durum" role="status"></p>
+
+</section>
+
+    </main>
+
+    <!-- Alt menü -->
+
+    <nav class="alt-menu" aria-label="Ana menü">
+
+        <button type="button"
+
+                class="aktif"
+
+                data-sayfa="ana-sayfa">
+
+            ⌂ Ana Sayfa
+
+        </button>
+
+        <button type="button" data-sayfa="ajanda">
+
+            ☷ Ajanda
+
+        </button>
+
+        <button type="button" data-sayfa="saglik">
+
+            ♡ Sağlık
+
+        </button>
+
+        <button type="button" data-sayfa="butce">
+
+            ₺ Bütçe
+
+        </button>
+
+<button type="button" data-sayfa="profil">
+
+    ♡ Profil
+
+</button>
+
+    </nav>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

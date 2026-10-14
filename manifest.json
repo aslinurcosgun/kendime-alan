@@ -1,0 +1,16 @@
+{
+  "name": "Kendime Alan",
+  "short_name": "Kendime Alan",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f9edf3",
+  "theme_color": "#f3dce8",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
