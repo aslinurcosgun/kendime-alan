@@ -1,4 +1,13 @@
+// Görev ve diğer kayıtlara benzersiz kimlik oluşturur
+function kaYeniId() {
+    if (typeof crypto !== "undefined" &&
+        typeof crypto.randomUUID === "function") {
+        return crypto.randomUUID();
+    }
 
+    return Date.now().toString(36) + "-" +
+        Math.random().toString(36).slice(2);
+}
 // MENU SISTEMI
 
 const menuButonlari = document.querySelectorAll(
@@ -224,7 +233,7 @@ let gorevler = [];
 
 try {
     const kayitliGorevler = JSON.parse(
-        localStorage.getItem("kendimeAlanGorevler") || "[]"
+        kaDepo.getItem("kendimeAlanGorevler") || "[]"
     );
 
     if (Array.isArray(kayitliGorevler)) {
@@ -238,7 +247,7 @@ try {
 // Gorevleri kaydet
 function gorevleriKaydet() {
     try {
-        localStorage.setItem(
+        kaDepo.setItem(
             "kendimeAlanGorevler",
             JSON.stringify(gorevler)
         );
@@ -409,7 +418,7 @@ gorevForm.addEventListener("submit", function(event) {
     }
 
     const yeniGorev = {
-        id: crypto.randomUUID(),
+        id: kaYeniId(),
         metin: gorevMetni,
         tamamlandi: false,
         tarih: tarihAnahtari(secilenTarih)
@@ -491,7 +500,7 @@ let haftalikPlanlar = [];
 
 try {
     const kayitlar = JSON.parse(
-        localStorage.getItem("kendimeAlanHaftalikPlanlar") || "[]"
+        kaDepo.getItem("kendimeAlanHaftalikPlanlar") || "[]"
     );
 
     if (Array.isArray(kayitlar)) {
@@ -505,7 +514,7 @@ try {
 // Haftalik planlari kaydet
 function haftalikKaydet() {
     try {
-        localStorage.setItem(
+        kaDepo.setItem(
             "kendimeAlanHaftalikPlanlar",
             JSON.stringify(haftalikPlanlar)
         );
@@ -627,7 +636,7 @@ haftalikForm.addEventListener("submit", function(event) {
     }
 
     haftalikPlanlar.push({
-        id: crypto.randomUUID(),
+        id: kaYeniId(),
         metin: metin,
         tamamlandi: false,
         hafta: haftaAnahtari
@@ -678,7 +687,7 @@ let aylikPlanlar = [];
 
 try {
     const kayitlar = JSON.parse(
-        localStorage.getItem("kendimeAlanAylikPlanlar") || "[]"
+        kaDepo.getItem("kendimeAlanAylikPlanlar") || "[]"
     );
 
     if (Array.isArray(kayitlar)) {
@@ -692,7 +701,7 @@ try {
 // Aylik planlari kaydet
 function aylikKaydet() {
     try {
-        localStorage.setItem(
+        kaDepo.setItem(
             "kendimeAlanAylikPlanlar",
             JSON.stringify(aylikPlanlar)
         );
@@ -844,7 +853,7 @@ let hedefler = [];
 
 try {
     const kayitlar = JSON.parse(
-        localStorage.getItem("kendimeAlanHedefler") || "[]"
+        kaDepo.getItem("kendimeAlanHedefler") || "[]"
     );
 
     if (Array.isArray(kayitlar)) {
@@ -858,7 +867,7 @@ try {
 // Hedefleri kaydet
 function hedefleriKaydet() {
     try {
-        localStorage.setItem(
+        kaDepo.setItem(
             "kendimeAlanHedefler",
             JSON.stringify(hedefler)
         );
@@ -1045,13 +1054,13 @@ let gunlukRutin = { sabah: [], aksam: [] };
 
 // Kayitlari ve kalici rutin sablonunu oku
 try {
-    const eskiSaglik = JSON.parse(localStorage.getItem(saglikAnahtar) || "{}");
+    const eskiSaglik = JSON.parse(kaDepo.getItem(saglikAnahtar) || "{}");
     if (!eskiSaglik || typeof eskiSaglik !== "object" || Array.isArray(eskiSaglik)) {
         throw new Error("Gecersiz saglik verisi");
     }
     saglikKayitlari = eskiSaglik;
 
-    const eskiRutin = localStorage.getItem(rutinAnahtar);
+    const eskiRutin = kaDepo.getItem(rutinAnahtar);
     if (eskiRutin !== null) {
         const sonuc = JSON.parse(eskiRutin);
         if (!sonuc || !Array.isArray(sonuc.sabah) || !Array.isArray(sonuc.aksam)) {
@@ -1068,7 +1077,7 @@ try {
 function saglikDepola(anahtar, veri) {
     if (!saglikVerisiOkunabilir) return false;
     try {
-        localStorage.setItem(anahtar, JSON.stringify(veri));
+        kaDepo.setItem(anahtar, JSON.stringify(veri));
         return true;
     } catch (hata) {
         console.error("Saglik kaydi basarisiz:", hata);
@@ -1617,7 +1626,7 @@ const bvKimlik = () => crypto.randomUUID();
 const bvPara = deger => Number(deger || 0).toLocaleString("tr-TR", { style: "currency", currency: "TRY" });
 const bvYuvarla = deger => Math.round((Number(deger) + Number.EPSILON) * 100) / 100;
 const bvKayitOku = (anahtar, varsayilan) => {
-    const ham = localStorage.getItem(anahtar);
+    const ham = kaDepo.getItem(anahtar);
     if (ham === null) return varsayilan;
     const deger = JSON.parse(ham);
     if (Array.isArray(varsayilan) ? !Array.isArray(deger) : (!deger || Array.isArray(deger) || typeof deger !== "object")) {
@@ -1686,11 +1695,11 @@ function bvHesapAdi(id) {
 }
 function bvKaydet(anahtar, veri) {
     if (!bvKullanilabilir) return false;
-    try { localStorage.setItem(anahtar, JSON.stringify(veri)); return true; }
+    try { kaDepo.setItem(anahtar, JSON.stringify(veri)); return true; }
     catch (hata) { console.error(hata); alert("Kayıt yapılamadı. Depolama alanını kontrol et."); return false; }
 }
 function bvEskiKayitlariHazirla() {
-    if (localStorage.getItem(BV_ISLEMLER) !== null) return;
+    if (kaDepo.getItem(BV_ISLEMLER) !== null) return;
     const eskiler = bvKayitOku("kendimeAlanIslemler", []);
     if (!eskiler.length) return;
     const eskiHesap = { id: "bv-eski-kayitlar", ad: "Eski Kayıtlar" };
@@ -2112,7 +2121,7 @@ const gununNotlari = [
 // LocalStorage verilerini oku
 function ozetVerisiniOku(anahtar, varsayilan) {
     try {
-        const ham = localStorage.getItem(anahtar);
+        const ham = kaDepo.getItem(anahtar);
 
         if (ham === null) {
             return varsayilan;
@@ -2238,7 +2247,7 @@ function anaGorevleriGoster(gorevListesiVerisi, bugun) {
 
                 kayit.tamamlandi = kutu.checked;
 
-                localStorage.setItem(
+                kaDepo.setItem(
                     "kendimeAlanGorevler",
                     JSON.stringify(sonGorevler)
                 );
@@ -2518,7 +2527,7 @@ yedekIndir.addEventListener("click", function() {
 
         Object.entries(yedekAnahtarlari).forEach(
             function([anahtar, tur]) {
-                const hamVeri = localStorage.getItem(anahtar);
+                const hamVeri = kaDepo.getItem(anahtar);
 
                 if (hamVeri === null) {
                     veriler[anahtar] = null;
@@ -2614,7 +2623,7 @@ yedekDosya.addEventListener("change", async function() {
         Object.keys(yedekAnahtarlari).forEach(
             function(anahtar) {
                 eskiVeriler[anahtar] =
-                    localStorage.getItem(anahtar);
+                    kaDepo.getItem(anahtar);
             }
         );
 
@@ -2644,9 +2653,9 @@ if (
         const veri = yedek.veriler[anahtar];
 
         if (veri === null) {
-            localStorage.removeItem(anahtar);
+            kaDepo.removeItem(anahtar);
         } else {
-            localStorage.setItem(
+            kaDepo.setItem(
                 anahtar,
                 JSON.stringify(veri)
             );
@@ -2662,9 +2671,9 @@ if (
                         const eski = eskiVeriler[anahtar];
 
                         if (eski === null) {
-                            localStorage.removeItem(anahtar);
+                            kaDepo.removeItem(anahtar);
                         } else {
-                            localStorage.setItem(
+                            kaDepo.setItem(
                                 anahtar,
                                 eski
                             );
@@ -2726,7 +2735,7 @@ let profilOkunabilir = true;
 
 // Kayitli profil bilgilerini oku
 try {
-    const hamProfil = localStorage.getItem(profilDepoAnahtari);
+    const hamProfil = kaDepo.getItem(profilDepoAnahtari);
 
     if (hamProfil !== null) {
         const kayit = JSON.parse(hamProfil);
@@ -2762,7 +2771,7 @@ function profiliKaydet(yeniProfil) {
     }
 
     try {
-        localStorage.setItem(
+        kaDepo.setItem(
             profilDepoAnahtari,
             JSON.stringify(yeniProfil)
         );
@@ -3131,7 +3140,7 @@ const kaKiloTarih = document.getElementById("ka-kilo-tarih");
 const kaKiloDeger = document.getElementById("ka-kilo-deger");
 let kaKiloOlcumleri = {};
 try {
-    const ham = JSON.parse(localStorage.getItem(kaKiloAnahtar) || "{}");
+    const ham = JSON.parse(kaDepo.getItem(kaKiloAnahtar) || "{}");
     if (ham && typeof ham === "object" && !Array.isArray(ham)) kaKiloOlcumleri = ham;
 } catch (hata) { console.error("Kilo olcumleri okunamadi", hata); }
 function kaKiloListele() {
@@ -3202,14 +3211,14 @@ document.getElementById("ka-kilo-ekle").addEventListener("click", () => {
     const tarih = kaKiloTarih.value, deger = Number(kaKiloDeger.value);
     if (!tarih || !kaKiloDeger.value || !Number.isFinite(deger) || deger < 1 || deger > 500) return alert("Geçerli bir tarih ve ölçüm gir.");
     const yeni = {...kaKiloOlcumleri, [tarih]: deger};
-    try { localStorage.setItem(kaKiloAnahtar, JSON.stringify(yeni)); kaKiloOlcumleri = yeni; kaKiloListele(); document.getElementById("ka-kilo-durum").textContent = "Ölçüm kaydedildi. 💗"; }
+    try { kaDepo.setItem(kaKiloAnahtar, JSON.stringify(yeni)); kaKiloOlcumleri = yeni; kaKiloListele(); document.getElementById("ka-kilo-durum").textContent = "Ölçüm kaydedildi. 💗"; }
     catch (hata) { alert("Ölçüm kaydedilemedi. Depolama alanını kontrol et."); }
 });
 document.getElementById("ka-kilo-sil").addEventListener("click", () => {
     const tarih = kaKiloTarih.value;
     if (!Object.prototype.hasOwnProperty.call(kaKiloOlcumleri,tarih) || !confirm("Seçili tarihteki ölçüm silinsin mi?")) return;
     const yeni = {...kaKiloOlcumleri}; delete yeni[tarih];
-    try { localStorage.setItem(kaKiloAnahtar, JSON.stringify(yeni)); kaKiloOlcumleri = yeni; kaKiloDeger.value = ""; kaKiloListele(); } catch (hata) { alert("Silinemedi."); }
+    try { kaDepo.setItem(kaKiloAnahtar, JSON.stringify(yeni)); kaKiloOlcumleri = yeni; kaKiloDeger.value = ""; kaKiloListele(); } catch (hata) { alert("Silinemedi."); }
 });
 kaKiloListele();
 
@@ -3321,7 +3330,7 @@ kaSaglikDonemGoster();
 // Ozel gunler profil ayarlarinda, takvimde emojiyle
 const kaOzelGunAnahtar = "kendimeAlanOzelGunler";
 window.kaOzelGunler = [];
-try { const d = JSON.parse(localStorage.getItem(kaOzelGunAnahtar) || "[]"); if (Array.isArray(d)) window.kaOzelGunler = d; } catch(e) { console.error("Ozel gunler okunamadi",e); }
+try { const d = JSON.parse(kaDepo.getItem(kaOzelGunAnahtar) || "[]"); if (Array.isArray(d)) window.kaOzelGunler = d; } catch(e) { console.error("Ozel gunler okunamadi",e); }
 function kaOzelGunleriGoster() {
     const liste = document.getElementById("ka-ozel-gun-listesi"); liste.replaceChildren();
     window.kaOzelGunler.forEach(o => {
@@ -3336,7 +3345,7 @@ function kaOzelGunleriGoster() {
     if(!window.kaOzelGunler.length)liste.textContent="Henüz özel gün eklenmedi.";
 }
 function kaOzelGunleriKaydet(liste) {
-    try {localStorage.setItem(kaOzelGunAnahtar,JSON.stringify(liste));window.kaOzelGunler=liste;kaOzelGunleriGoster();takvimiGoster();}
+    try {kaDepo.setItem(kaOzelGunAnahtar,JSON.stringify(liste));window.kaOzelGunler=liste;kaOzelGunleriGoster();takvimiGoster();}
     catch(hata){alert("Özel gün kaydedilemedi.");}
 }
 const kaAyarIcerik = document.querySelector("#ka-profil-ayarlar > .ka-acilir-icerik");

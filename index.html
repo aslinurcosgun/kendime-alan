@@ -20,11 +20,89 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Kendime Alan">
 
+<style>
+/* Giriş kontrolü tamamlanana kadar sakin bir karşılama */
+#ka-yukleniyor[hidden], #ka-sifre-yenile[hidden], #giris-ekrani[hidden], main.uygulama[hidden], nav.alt-menu[hidden], #cikis-yap-btn[hidden] { display: none !important; }
+#ka-yukleniyor { min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 30px; text-align: center; background: #fff9fc; color: #745a6b; }
+#ka-yukleniyor .ka-yukleniyor-cicek { font-size: 44px; }
+#ka-yukleniyor h2 { margin: 0; color: #916b86; font-size: 24px; }
+#ka-yukleniyor p { margin: 0; font-size: 14px; }
+#ka-yukleniyor .ka-yukleniyor-nokta { width: 25px; height: 25px; border: 3px solid #f4dae7; border-top-color: #c385a6; border-radius: 50%; animation: ka-don 1s linear infinite; }
+@keyframes ka-don { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { #ka-yukleniyor .ka-yukleniyor-nokta { animation: none; } }
+#cikis-yap-btn:not([hidden]) { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: auto; max-width: 100%; margin: 18px 0 12px; padding: 10px 18px; border: 1px solid #e5bcd0; border-radius: 999px; background: #fff2f8; color: #865475; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: none; transition: background .2s, transform .2s; }
+#cikis-yap-btn:hover { background: #f7dce9; transform: translateY(-1px); }
+#cikis-yap-btn:focus-visible { outline: 3px solid #9b6483; outline-offset: 3px; }
+#cikis-yap-btn:disabled { opacity: .55; cursor: wait; }
+/* Şifre yenileme kartı */
+#ka-sifre-yenile { max-width: 440px; margin: 7vh auto; padding: 28px; border: 1px solid #efd8e4; border-radius: 22px; background: #fff9fc; box-shadow: 0 8px 30px #7c516218; color: #745a6b; }
+#ka-sifre-yenile h2 { color: #916b86; text-align: center; }
+#ka-sifre-yenile p { font-size: 14px; line-height: 1.6; }
+#ka-sifre-yenile label { display: block; margin: 14px 0 6px; font-weight: 600; }
+#ka-sifre-yenile input { width: 100%; box-sizing: border-box; padding: 12px; border: 1px solid #dfbed0; border-radius: 12px; font: inherit; background: white; }
+#ka-sifre-yenile button { width: 100%; margin-top: 16px; padding: 12px; border: 0; border-radius: 16px; background: #e9bdd4; color: #633e56; font: inherit; font-weight: 700; cursor: pointer; }
+#ka-sifre-yenile button:disabled { opacity: .55; cursor: wait; }
+#ka-sifre-yenile [role=status] { min-height: 1.5em; }
+</style>
 </head>
 
 <body>
+<section id="ka-yukleniyor" role="status" aria-live="polite">
+    <div class="ka-yukleniyor-cicek" aria-hidden="true">🌷</div>
+    <h2>Kendime Alan</h2>
+    <p>Küçük dünyan hazırlanıyor...</p>
+    <div class="ka-yukleniyor-nokta" aria-hidden="true"></div>
+</section>
+    <!-- Şifre sıfırlama e-postasındaki bağlantı için -->
+<section id="ka-sifre-yenile" hidden aria-labelledby="ka-sifre-yenile-baslik">
+    <h2 id="ka-sifre-yenile-baslik">🌷 Yeni Şifrem</h2>
+    <p>E-posta bağlantın doğrulanınca yeni şifreni belirleyebilirsin.</p>
+    <form id="ka-sifre-yenile-formu">
+        <label for="ka-yeni-sifre">Yeni şifre (en az 10 karakter)</label>
+        <input id="ka-yeni-sifre" type="password" autocomplete="new-password" minlength="10" required>
+        <label for="ka-yeni-sifre-tekrar">Yeni şifreyi tekrar yaz</label>
+        <input id="ka-yeni-sifre-tekrar" type="password" autocomplete="new-password" minlength="10" required>
+        <button id="ka-sifre-yenile-buton" type="submit" disabled>Şifremi Güncelle</button>
+    </form>
+    <p id="ka-sifre-yenile-mesaj" role="status" aria-live="polite">Bağlantı doğrulanıyor...</p>
+    <button id="ka-sifre-yenile-don" type="button">Giriş ekranına dön</button>
+</section>
+    <!-- Giriş ve kayıt ekranı -->
+<section id="giris-ekrani" hidden>
+    <h2>Kendime Alan 🌷</h2>
+    <p>Kendi küçük dünyana hoş geldin 💗</p>
 
-    <main class="uygulama">
+    <form id="giris-formu">
+        <label for="giris-email">E-posta</label>
+        <input
+            type="email"
+            id="giris-email"
+            placeholder="E-posta adresin"
+            autocomplete="email"
+            required
+        >
+
+        <label for="giris-sifre">Şifre</label>
+        <input
+            type="password"
+            id="giris-sifre"
+            placeholder="Şifren"
+            autocomplete="current-password"
+            minlength="10"
+            required
+        >
+
+        <button type="submit">Giriş Yap</button>
+    </form>
+
+    <button type="button" id="kayit-ol-btn">Hesap Oluştur</button>
+    <button type="button" id="sifremi-unuttum-btn">Şifremi Unuttum</button>
+
+    <p id="giris-mesaji" role="status" aria-live="polite"></p>
+</section>
+
+    <div id="ka-sync-uyari" role="alert" hidden style="position:sticky;top:0;z-index:9999;background:#fff0f4;color:#9b234d;padding:12px;text-align:center;font-weight:600"></div>
+    <main class="uygulama" hidden>
 
         <!-- Üst başlık -->
 
@@ -1175,19 +1253,20 @@
 
         <p>
 
-            İleride e-posta ile giriş yapabilecek
-
-            ve kayıtlarını cihazların arasında
-
-            eşitleyebileceksin.
+           E-posta hesabınla giriş yapabilir ve kayıtlarını telefonun ile bilgisayarın arasında senkronize edebilirsin. ☁️
 
         </p>
 
-        <p>🌷 Yakında eklenecek.</p>
+        <p id="ka-sync-durum" role="status">☁️ Bağlantı kontrol ediliyor...</p>
+        <button type="button" id="ka-sync-tekrar">☁️ Eşitlemeyi Tekrar Dene</button>
 
     </div>
 
     <p id="profil-durum" role="status"></p>
+
+    <button type="button" id="cikis-yap-btn" hidden>
+    <span aria-hidden="true">🔒</span> Çıkış Yap
+</button>
 
 </section>
 
@@ -1195,7 +1274,7 @@
 
     <!-- Alt menü -->
 
-    <nav class="alt-menu" aria-label="Ana menü">
+    <nav class="alt-menu" aria-label="Ana menü" hidden>
 
         <button type="button"
 
@@ -1233,7 +1312,10 @@
 
     </nav>
 
-    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="auth.js"></script>
+    <script src="veri.js"></script>
+    <!-- script.js güvenli oturum ve veri yükleme SONRASI auth.js tarafından açılır. -->
 
 </body>
 
